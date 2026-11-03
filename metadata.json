@@ -1,0 +1,8 @@
+{
+  "name": "Remix دليل أدوات الذكاء الاصطناعي الشامل - AI Tools Atlas",
+  "description": "منصة تعليمية وموسوعة شاملة تشرح كافة أدوات الذكاء الاصطناعي التوليدي مع فيديوهات شرح وتطبيقات عملية، روابط الوصول الرسمية، تصنيفات تفصيلية، وأوامر برومبت جاهزة للاستخدام.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

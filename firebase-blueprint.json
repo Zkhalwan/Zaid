@@ -1,0 +1,196 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information synchronized upon sign-in",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "User UID",
+          "maxLength": 128
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the user",
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user",
+          "maxLength": 200
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Avatar photo URL",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp or server time string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp or server time string"
+        }
+      },
+      "required": ["id", "displayName", "email"]
+    },
+    "ToolFavorite": {
+      "title": "ToolFavorite",
+      "description": "User bookmarked favorite AI tool reference",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique favorite ID or tool ID",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "User UID who bookmarked the tool",
+          "maxLength": 128
+        },
+        "toolId": {
+          "type": "string",
+          "description": "ID of the AI tool bookmarked",
+          "maxLength": 64
+        },
+        "toolName": {
+          "type": "string",
+          "description": "Name of the tool",
+          "maxLength": 100
+        },
+        "arabicName": {
+          "type": "string",
+          "description": "Arabic title of the tool",
+          "maxLength": 100
+        },
+        "category": {
+          "type": "string",
+          "description": "Tool category",
+          "maxLength": 50
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when added to favorites"
+        }
+      },
+      "required": ["id", "userId", "toolId", "toolName"]
+    },
+    "CustomPrompt": {
+      "title": "CustomPrompt",
+      "description": "Personal AI prompt created or saved by the user",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Prompt ID",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner user UID",
+          "maxLength": 128
+        },
+        "toolName": {
+          "type": "string",
+          "description": "Associated AI tool name",
+          "maxLength": 100
+        },
+        "title": {
+          "type": "string",
+          "description": "Prompt title",
+          "maxLength": 150
+        },
+        "category": {
+          "type": "string",
+          "description": "Prompt category tag",
+          "maxLength": 64
+        },
+        "prompt": {
+          "type": "string",
+          "description": "Full prompt text content",
+          "maxLength": 5000
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["id", "userId", "toolName", "title", "prompt"]
+    },
+    "ToolReview": {
+      "title": "ToolReview",
+      "description": "Community review and rating for an AI tool",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Review document ID",
+          "maxLength": 128
+        },
+        "toolId": {
+          "type": "string",
+          "description": "ID of the reviewed AI tool",
+          "maxLength": 64
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the author user",
+          "maxLength": 128
+        },
+        "userName": {
+          "type": "string",
+          "description": "Display name of the reviewer",
+          "maxLength": 100
+        },
+        "userPhoto": {
+          "type": "string",
+          "description": "Reviewer avatar photo URL",
+          "maxLength": 500
+        },
+        "rating": {
+          "type": "number",
+          "description": "Rating score between 1 and 5"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Review commentary or tips",
+          "maxLength": 1500
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last updated timestamp"
+        }
+      },
+      "required": ["id", "toolId", "userId", "userName", "rating", "comment"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile document containing authentication info and preferences"
+    },
+    "/users/{userId}/favorites/{toolId}": {
+      "schema": "ToolFavorite",
+      "description": "Collection of favorite AI tools saved by a specific user"
+    },
+    "/users/{userId}/custom_prompts/{promptId}": {
+      "schema": "CustomPrompt",
+      "description": "Custom prompt templates created and saved by the user"
+    },
+    "/tool_reviews/{reviewId}": {
+      "schema": "ToolReview",
+      "description": "Public community reviews and user ratings for AI tools"
+    }
+  }
+}
